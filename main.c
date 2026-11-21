@@ -1,33 +1,53 @@
+
 #include <stdio.h>
-#include <stdlib.h>
 
-int g_m = 9966990;
-int g_x = 0;
-int g_ans = 0;
-
-void calc_gcd(void)
-{
-    int r;
-    int a = g_m;
-    int b = g_x;
-    for (; b != 0;)
-    {
-        r = a % b;
-        a = b;
-        b = r;
-    }
-    g_ans = abs(a);
-}
+int gcd(int m, int x);
 
 int main(void)
 {
-    scanf("%d", &g_x);
-    if (g_x > g_m)
+    int number;
+    int result;
+
+    if (scanf("%d", &number) != 1)
+    {
+        return 0;
+    }
+
+    if (number > 9966990)
     {
         printf("NG");
         return 0;
     }
-    calc_gcd();
-    printf("%d", g_ans);
+
+    result = gcd(9966990, number);
+
+    printf("%d", result);
+
     return 0;
+}
+
+int gcd(int m, int x)
+{
+    long long first = m;
+    long long second = x;
+    long long remainder;
+
+    if (first < 0)
+    {
+        first = -first;
+    }
+
+    if (second < 0)
+    {
+        second = -second;
+    }
+
+    while (second != 0)
+    {
+        remainder = first % second;
+        first = second;
+        second = remainder;
+    }
+
+    return (int)first;
 }
